@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 //Setting which port to connect to
-const port = 3000;
+const port = process.event.PORT || 3000;
 
 //Making sure the files are available
 app.use('/images', express.static('images'));
