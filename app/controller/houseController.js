@@ -15,8 +15,8 @@ exports.create = (req, res) =>{
     const newHouse = new House({
         houseName: req.body.houseName,
         houseInfo: req.body.houseInfo,
-        houseImage: `http://kandidat-test.herokuapp.com/${req.files.houseImage[0].path}`,        
-        houseModel:  `http://kandidat-test.herokuapp.com/${req.files.houseModel[0].path}`
+        houseImage: `https://kandidat-test.herokuapp.com/${req.files.houseImage[0].path}`,        
+        houseModel:  `https://kandidat-test.herokuapp.com/${req.files.houseModel[0].path}`
     });
 
     //Calling the cretae function from houseModel, to put the house in the db
@@ -57,7 +57,7 @@ exports.findImage = (req, res) => {
              //If there is an internal server error
              else res.status(500).send("There was an error when retrieving the image.");
         }
-        else res.send(data);
+        else res.redirect(data);
     });
 }
 
