@@ -15,8 +15,8 @@ exports.create = (req, res) =>{
     const newHouse = new House({
         houseName: req.body.houseName,
         houseInfo: req.body.houseInfo,
-        houseImage: `http://localhost:3000/${req.files.houseImage[0].path}`,        
-        houseModel:  `http://localhost:3000/${req.files.houseModel[0].path}`
+        houseImage: `http://kandidat-test.herokuapp.com/${req.files.houseImage[0].path}`,        
+        houseModel:  `http://kandidat-test.herokuapp.com/${req.files.houseModel[0].path}`
     });
 
     //Calling the cretae function from houseModel, to put the house in the db
