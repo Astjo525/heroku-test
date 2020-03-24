@@ -70,7 +70,7 @@ exports.findModel = (req, res) => {
             //If there is an internal server error
             else res.status(500).send("There was an error when retrieving the model.");
         }
-        else res.send(data);
+        else res.redirect(data);
     })
 }
 
