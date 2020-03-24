@@ -4,7 +4,7 @@ const mysql = require("mysql");
 
 //Creating a connection to the databaser
 //createPool
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
     host: "eu-cdbr-west-02.cleardb.net",
     user: "bf6652f839f5d9",
     password: "4eead042",
@@ -12,12 +12,12 @@ const connection = mysql.createConnection({
 });
 
 //Opening the connection the MySQL
-connection.connect(error => {
+/*connection.connect(error => {
     if(error) {
         console.log("An error occurred when connecting to the database.")
         throw error;
     }
     console.log("Successfully connected to the database");
-});
+});*/
 
 module.exports = connection;
