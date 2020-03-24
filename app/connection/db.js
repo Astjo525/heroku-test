@@ -3,6 +3,7 @@
 const mysql = require("mysql"); 
 
 //Creating a connection to the databaser
+//createPool
 const connection = mysql.createConnection({
     host: "eu-cdbr-west-02.cleardb.net",
     user: "bf6652f839f5d9",
