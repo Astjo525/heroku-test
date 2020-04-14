@@ -33,7 +33,7 @@ House.getAll = result => {
 
 //Retrieving all houses from the "houses" table
 House.getAllStandard = result => {
-    sql.query("SELECT house_id, collection_name, rooms, " 
+    sql.query("SELECT house_id, collection_name, rooms, " +
     "floors, living_area, build_area, height, roof_angle, roof_type_name, " +
     "short_info, long_info, house_image, house_model " +
     "FROM standard_houses " +
