@@ -35,7 +35,7 @@ House.getAll = result => {
 House.getAllStandard = result => {
     sql.query("SELECT house_id, collection_name, rooms, floors, living_area, " +
     "build_area, height, roof_angle, roof_type_name, short_info, long_info, house_image, house_model" +
-    "FROM standard_houses INNER JOIN collections USING (collection_id) INNER JOIN roof_types USING (roof_type_id)",
+    "FROM standard_houses INNER JOIN collections using (collection_id) INNER JOIN roof_types using (roof_type_id)",
     (err, res) => {
         if(err) {
             result(err, null);
