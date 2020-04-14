@@ -1,8 +1,8 @@
 //Specifies which REST API request will be allowed
 module.exports = app => {
     var houseController = require('../controller/houseController.js');
-    const multer = require('multer');
 
+    const multer = require('multer');
 
     const storage = multer.diskStorage({
         destination: function(req, file, callback) {
@@ -38,14 +38,15 @@ module.exports = app => {
     };
 
     var upload = multer({storage: storage, fileFilter: fileFilter});
-
- 
-
+    
     //Post a new house to the "houses" table and upload files
-    app.post('/houses', upload.fields([{name: 'houseImage'}, {name: 'houseModel'}]), houseController.create);
+    app.post('/houses', upload.fields([{name: 'houseImage'}, {name: 'houseModel'}]), houseController.create);  
 
     //Get a list of all houses in the "houses" table
     app.get('/houses', houseController.findAll);
+
+    //Get a list of all houses in the standardHouses table
+    app.get('/standardHouses', houseController.findAllStandard);
 
     //Get a house based on id
     app.get('/houses/:houseId', houseController.findById);    

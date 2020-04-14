@@ -31,6 +31,17 @@ House.getAll = result => {
     });
 };
 
+//Retrieving all houses from the "houses" table
+House.getAllStandard = result => {
+    sql.query("SELECT * FROM standardhouses", (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        }
+    result(null, res);
+    });
+};
+
 //Retrieving a house by Id from the database
 House.getById = (id, result) => {
     //Sql query to retrieve house with id

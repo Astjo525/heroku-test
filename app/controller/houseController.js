@@ -15,9 +15,46 @@ exports.create = (req, res) =>{
     const newHouse = new House({
         houseName: req.body.houseName,
         houseInfo: req.body.houseInfo,
-        houseImage: `https://kandidat-test.herokuapp.com/${req.files.houseImage[0].path}`,        
-        houseModel:  `https://kandidat-test.herokuapp.com/${req.files.houseModel[0].path}`
+        houseImage: req.files.houseImage[0].path,        
+        houseModel:  req.files.houseModel[0].path
     });
+
+    //Commented out connection to s3 (not working)
+    /*
+    const S3_BUCKET = process.env.S3_BUCKET;
+    console.log("S#_BUCKET" + S3_BUCKET);
+    const AWS = require('aws-sdk');
+    const fs = require('fs');
+
+    //AWS.config.region = 'eu-north-1';
+        const s3 = new AWS.S3({
+        accessKeyID: 'AKIATJGRWQB2ERDNIMZP', //process.env.AWS_ACCESS_KEY,
+        secretAccessKey: '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' //process.env.AWS_SECRET_ACCESS_KEY
+    });
+    console.log("s3 is " + s3);
+
+        const imageName = req.files.houseImage[0].path;
+        const modelName = req.files.houseModel[0].path;
+
+        const uploadFile = () => {
+            console.log("here 1");
+            fs.readFile(imageName, (err, data) => {
+                console.log("here 2");
+                if (err) throw err;
+                const params = {
+                    Bucket: 'kandidatbucket',
+                    Key: imageName,
+                    Body: JSON.stringify(data, null, 2)
+                };
+            s3.upload(params, function(s3Err, data) {
+                console.log("here 3");
+                if(s3Err) throw s3Err
+                console.log(`File uploaded at ${data.Location}`)
+            });
+            }); 
+        }; 
+
+        uploadFile();  */
 
     //Calling the cretae function from houseModel, to put the house in the db
     House.add(newHouse, (err, data) => {
@@ -29,6 +66,14 @@ exports.create = (req, res) =>{
 //Function to get all the houses. Calls getAll, which does an SQL query, and handles error.
 exports.findAll = (req, res) => {
     House.getAll((err, data) => {
+        if(err) res.status(500).send("There was an error when retrieving the houses.");
+        else res.send(data);
+    });
+};  
+
+//Function to get all the houses. Calls getAll, which does an SQL query, and handles error.
+exports.findAllStandard = (req, res) => {
+    House.getAllStandard((err, data) => {
         if(err) res.status(500).send("There was an error when retrieving the houses.");
         else res.send(data);
     });
@@ -58,7 +103,7 @@ exports.findImage = (req, res) => {
              else res.status(500).send("There was an error when retrieving the image.");
         }
         else res.redirect(data);
-    });
+    }); 
 }
 
 //Function to find model
