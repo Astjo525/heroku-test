@@ -1,6 +1,9 @@
 {
   "name": "kandidat",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.13.0"
+  },
   "description": "REST api with Nodejs and express. MySQL database",
   "main": "server.js",
   "scripts": {
