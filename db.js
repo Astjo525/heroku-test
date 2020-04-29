@@ -8,7 +8,6 @@ var MySQLStore = require('express-mysql-session');
 const connection = mysql.createPool({
     host: "eu-cdbr-west-02.cleardb.net",
     user: "bf6652f839f5d9",
-    port: port,
     password: "4eead042",
     database: "heroku_af4f9f69f37b397"
 });
