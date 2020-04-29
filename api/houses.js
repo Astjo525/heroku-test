@@ -38,7 +38,7 @@ module.exports = {
             db.query({
                 sql: 
                     'SELECT house_name, ' +
-                            'image_link, ' +
+                            'house_image, ' +
                             'house_model ' +
                     'FROM personal_houses ' +
                         'INNER JOIN personal_houses_images USING (image_id) ' +
