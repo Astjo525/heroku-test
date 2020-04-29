@@ -5,7 +5,7 @@ var MySQLStore = require('express-mysql-session');
 
 //Creating a connection to the databaser
 //createPool
-const connection = mysql.createPool({
+const db = mysql.createPool({
     host: "eu-cdbr-west-02.cleardb.net",
     user: "bf6652f839f5d9",
     password: "4eead042",
