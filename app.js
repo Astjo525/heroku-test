@@ -10,17 +10,10 @@ const TWO_HOURS = 1000*60*60*2;
 const port = process.env.PORT || 3000;
 
 //LÄGGER TILL SEQUELIZESTORE TILL SESSIONS
+var connection = ('db.js');
 var MySQLStore = require('express-mysql-session')(session);
 
-var options = {
-    host: "eu-cdbr-west-02.cleardb.net",
-    port: port,
-    user: "bf6652f839f5d9",
-    password: "4eead042",
-    database: "heroku_af4f9f69f37b397"
-}
-
-var sessionStore = new MySQLStore(options);
+var sessionStore = new MySQLStore({}, connection);
 
 app.use(session({
     key: 'session_name',
