@@ -450,7 +450,7 @@ router.get('/logout/app', (req, res) => {
     if(req.session.user_id){
         // destroy the session
         req.session.destroy(() => {
-            res.clearCookie(process.env.SESS_NAME)
+            //res.clearCookie(process.env.SESS_NAME)
 
             return res.status(200).json({
                 success: 1,
