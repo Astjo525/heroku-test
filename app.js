@@ -20,11 +20,15 @@ var sequelize = new SequelizeStore(
         "storage": "./session.sqlite"
 });
 
+var mySessionStore = new SequelizeStore({
+    db: sequelize
+});
+
+mySessionStore.Sync();
+
 app.use(session({
     secret: 'secret',
-    store: new SequelizeStore({
-        db: sequelize
-    }),
+    store: mySessionStore,
     resave: false,
     proxy: true
 }))
