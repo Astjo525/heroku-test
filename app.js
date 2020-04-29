@@ -10,29 +10,24 @@ const TWO_HOURS = 1000*60*60*2;
 const port = process.env.PORT || 3000;
 
 //LÄGGER TILL SEQUELIZESTORE TILL SESSIONS
-var SequelizeStore = require('connect-session-sequelize')(session.Store);
+var MySQLStore = require('express-mysql-session')(session);
 
+var options = {
+    host: "eu-cdbr-west-02.cleardb.net",
+    port: port,
+    user: "bf6652f839f5d9",
+    password: "4eead042",
+    database: "heroku_af4f9f69f37b397"
+}
 
-
-var sequelize = new Sequelize(
-    "database",
-    "username",
-    "password", {
-        "dialect": "sqlite",
-        "storage": "../session.sqlite"
-});
-
-var mySessionStore = new SequelizeStore({
-    db: sequelize
-});
-
-mySessionStore.Sync();
+var sessionStore = new MySQLStore(options);
 
 app.use(session({
-    secret: 'secret',
-    store: mySessionStore,
+    key: 'session_name'
+    secret: 'session_secret',
+    store: sessionStore,
     resave: false,
-    proxy: true
+    saveUninitialized: false
 }))
 
 // //Express Session Middleware
