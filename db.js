@@ -18,7 +18,16 @@ var options = {
     expiration: 86400000,
     createDatabaseTable: true,
     connectionLimit: 1,
-    endConnectionOnClose: true
+    endConnectionOnClose: true,
+    charset: 'utf8mb4_bin',
+    schema: {
+        tableName: 'sessions',
+        columnNames: {
+            session_id: 'session_id',
+            expires: 'expires',
+            data: 'data'
+        }
+    }
 }
 
 var sessionStore = new MySQLStore(options, db);
