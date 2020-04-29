@@ -2,11 +2,15 @@
 
 const mysql = require("mysql"); 
 
+//Setting which port to connect to
+const port = process.env.PORT || 3000;
+
 //Creating a connection to the databaser
 //createPool
 const connection = mysql.createPool({
     host: "eu-cdbr-west-02.cleardb.net",
     user: "bf6652f839f5d9",
+    port: port,
     password: "4eead042",
     database: "heroku_af4f9f69f37b397"
 });
