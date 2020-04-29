@@ -12,12 +12,14 @@ const port = process.env.PORT || 3000;
 //LÄGGER TILL SEQUELIZESTORE TILL SESSIONS
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-var sequelize = new SequelizeStore(
+
+
+var sequelize = new Sequelize(
     "database",
     "username",
     "password", {
         "dialect": "sqlite",
-        "storage": "./session.sqlite"
+        "storage": "../session.sqlite"
 });
 
 var mySessionStore = new SequelizeStore({
