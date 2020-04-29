@@ -21,29 +21,29 @@ module.exports = app => {
         }
     });
 
-    const fileFilter = (req, file, callback) => {
-        if(file.fieldname === 'houseImage') {
-            if(file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
-                callback(null, true);
-                return;
-            } 
-        }
-        else if(file.fieldname === 'houseModel') {
-            if(file.mimetype === 'application/octet-stream') {
-                callback(null, true);
-                return;
-            }
-        }
-        callback(null, false);
-    };
+    // const fileFilter = (req, file, callback) => {
+    //     if(file.fieldname === 'houseImage') {
+    //         if(file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
+    //             callback(null, true);
+    //             return;
+    //         } 
+    //     }
+    //     else if(file.fieldname === 'houseModel') {
+    //         if(file.mimetype === 'application/octet-stream') {
+    //             callback(null, true);
+    //             return;
+    //         }
+    //     }
+    //     callback(null, false);
+    // };
 
-    var upload = multer({storage: storage, fileFilter: fileFilter});
+    // var upload = multer({storage: storage, fileFilter: fileFilter});
     
-    //Post a new house to the "houses" table and upload files
-    app.post('/houses', upload.fields([{name: 'houseImage'}, {name: 'houseModel'}]), houseController.create);  
+    // //Post a new house to the "houses" table and upload files
+    // app.post('/houses', upload.fields([{name: 'houseImage'}, {name: 'houseModel'}]), houseController.create);  
 
-    //Get a list of all houses in the "houses" table
-    app.get('/houses', houseController.findAll);
+    // //Get a list of all houses in the "houses" table
+    // app.get('/houses', houseController.findAll);
 
     //Get a list of all houses in the standardHouses table
     app.get('/standardHouses', houseController.findAllStandard);
