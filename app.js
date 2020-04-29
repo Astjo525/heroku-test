@@ -13,22 +13,23 @@ const port = process.env.PORT || 3000;
 //EXPRESS-MYSQL-SESSION
 //EXPRESS-MYSQL-SESSION
 var MySQLStore = require('express-mysql-session')(session);
+var db = require('./db.js');
 
-var options = {
-    host: "eu-cdbr-west-02.cleardb.net",
-    port: port,
-    user: "bf6652f839f5d9",
-    password: "4eead042",
-    database: "heroku_af4f9f69f37b397"
-    // clearExpired: true,
-    // checkExpirationInterval: 900000,
-    // expiration: 86400000,
-    // createDatabaseTable: true,
-    // connectionLimit: 1,
-    // endConnectionOnClose: true
-}
+// var options = {
+//     host: "eu-cdbr-west-02.cleardb.net",
+//     port: port,
+//     user: "bf6652f839f5d9",
+//     password: "4eead042",
+//     database: "heroku_af4f9f69f37b397"
+//     // clearExpired: true,
+//     // checkExpirationInterval: 900000,
+//     // expiration: 86400000,
+//     // createDatabaseTable: true,
+//     // connectionLimit: 1,
+//     // endConnectionOnClose: true
+// }
 
-var sessionStore = new MySQLStore(options);
+var sessionStore = new MySQLStore(db);
 
 //Express Session Middleware
 app.use(session({
