@@ -1,4 +1,4 @@
-const db = require("../db");
+const { db } = require("../db");
 const { hashSync, compareSync } = require("bcrypt");
 
 let getUserByUsername = (username) => {

@@ -1,9 +1,7 @@
 //Script connecting the database to the server
 
 const mysql = require("mysql"); 
-
-//Setting which port to connect to
-const port = process.env.PORT || 3000;
+var MySQLStore = require('express-mysql-session');
 
 //Creating a connection to the databaser
 //createPool
@@ -15,6 +13,17 @@ const connection = mysql.createPool({
     database: "heroku_af4f9f69f37b397"
 });
 
+var options = {
+    clearExpired: true,
+    checkExpirationInterval: 900000,
+    expiration: 86400000,
+    createDatabaseTable: true,
+    connectionLimit: 1,
+    endConnectionOnClose: true
+}
+
+var sessionStore = new MySQLStore(options, db);
+
 //Opening the connection the MySQL
 /*connection.connect(error => {
     if(error) {
@@ -24,4 +33,4 @@ const connection = mysql.createPool({
     console.log("Successfully connected to the database");
 });*/
 
-module.exports = connection;
+module.exports = { db , sessionStore };

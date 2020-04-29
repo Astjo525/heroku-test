@@ -12,8 +12,8 @@ const port = process.env.PORT || 3000;
 //express-mysql-session
 //EXPRESS-MYSQL-SESSION
 //EXPRESS-MYSQL-SESSION
-var MySQLStore = require('express-mysql-session')(session);
-var db = require('./db.js');
+// var MySQLStore = require('express-mysql-session')(session);
+// var db = require('./db.js');
 
 // var options = {
 //     host: "eu-cdbr-west-02.cleardb.net",
@@ -29,7 +29,9 @@ var db = require('./db.js');
 //     // endConnectionOnClose: true
 // }
 
-var sessionStore = new MySQLStore(db);
+// var sessionStore = new MySQLStore(db);
+
+var { sessionStore } = require('./db.js');
 
 //Express Session Middleware
 app.use(session({
