@@ -76,8 +76,8 @@ module.exports = {
                 resolve(false);
             }
             db.query({ 
-                sql: 'INSERT INTO `personal_houses_images`(image_link) VALUES (?)',
-                values: [image_link],
+                sql: 'INSERT INTO `personal_houses_images`(house_image) VALUES (?)',
+                values: [house_image],
             }, (error, result) => {
                 if(error) {
                     reject(error);
