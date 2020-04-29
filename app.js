@@ -20,7 +20,7 @@ app.use(session({
         maxAge: TWO_HOURS, 
         samSite: true, 
         secure: process.env.NODE_ENV === 'production',
-        cookie: { secure: true}
+        secure: true
         //TODO: secure: enable https - enable TLS connection to server 
 	}
 }));
