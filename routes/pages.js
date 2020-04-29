@@ -460,6 +460,6 @@ router.get('/logout/app', (req, res) => {
     }
 }); 
 
-}
+
 
 module.exports = router;
