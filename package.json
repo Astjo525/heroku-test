@@ -1,24 +1,15 @@
 {
-  "name": "kandidat",
+  "name": "fan",
   "version": "1.0.0",
-  "engines": {
-    "node": "10.13.0"
-  },
-  "description": "REST api with Nodejs and express. MySQL database",
-  "main": "server.js",
+  "description": "",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
-  "keywords": [
-    "nodejs",
-    "express",
-    "restapi",
-    "mysql"
-  ],
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.645.0",
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
@@ -26,11 +17,8 @@
     "express-flash": "0.0.2",
     "express-session": "^1.17.1",
     "express-validator": "^6.4.0",
-    "multer": "^1.4.2",
     "mysql": "^2.18.1",
-    "node-pre-gyp": "^0.14.0",
     "nodemon": "^2.0.3",
-    "save": "^2.4.0",
     "util.promisify": "^1.0.1"
   }
 }
