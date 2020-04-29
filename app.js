@@ -10,18 +10,18 @@ const TWO_HOURS = 1000*60*60*2;
 const port = process.env.PORT || 3000;
 
 //LÄGGER TILL SEQUELIZESTORE TILL SESSIONS
-var connection = ('db.js');
-var MySQLStore = require('express-mysql-session')(session);
+// var connection = ('db.js');
+// var MySQLStore = require('express-mysql-session')(session);
 
-var sessionStore = new MySQLStore({}, connection);
+// var sessionStore = new MySQLStore({}, connection);
 
-app.use(session({
-    key: 'session_name',
-    secret: 'session_secret',
-    store: sessionStore,
-    resave: false,
-    saveUninitialized: false
-}))
+// app.use(session({
+//     key: 'session_name',
+//     secret: 'session_secret',
+//     store: sessionStore,
+//     resave: false,
+//     saveUninitialized: false
+// }))
 
 // //Express Session Middleware
 // app.use(session({
