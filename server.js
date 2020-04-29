@@ -47,6 +47,8 @@ app.use(session({
 	}
 }));
 
+require("./routes/pages.js")(app);
+
 app.use(express.json());
 
 //routes
