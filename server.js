@@ -28,10 +28,7 @@ require("./app/routes/houseRoutes.js")(app);
 
 //MERGED DB
 require("dotenv").config();
-const express = require('express');
-const bodyParser = require('body-parser');
 const session = require('express-session');
-const app = express();
 const pageRouter = require('./routes/pages');
 const TWO_HOURS = 1000*60*60*2;
 
