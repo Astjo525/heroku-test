@@ -23,7 +23,7 @@ var options = {
 var sessionStore = new MySQLStore(options);
 
 app.use(session({
-    key: 'session_name'
+    key: 'session_name',
     secret: 'session_secret',
     store: sessionStore,
     resave: false,
