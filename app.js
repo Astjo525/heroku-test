@@ -9,21 +9,40 @@ const TWO_HOURS = 1000*60*60*2;
 //Setting which port to connect to
 const port = process.env.PORT || 3000;
 
-//Express Session Middleware
-app.use(session({
-    name: "sid", //process.env.SESS_NAME,
-    resave: false,
-    saveUninitialized: false,
-    secret: "abc123", //process.env.SESS_SECRET,
+//LÄGGER TILL SEQUELIZESTORE TILL SESSIONS
+var SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-    cookie: {
-        maxAge: TWO_HOURS, 
-        samSite: true, 
-        secure: process.env.NODE_ENV === 'production',
-        secure: true
-        //TODO: secure: enable https - enable TLS connection to server 
-	}
-}));
+var sequelize = new SequelizeStore(
+    "database",
+    "username",
+    "password", {
+        "dialect": "sqlite",
+        "storage": "./session.sqlite"
+});
+
+app.use(session({
+    secret: 'secret',
+    store: new SequelizeStore({
+        db: sequelize
+    }),
+    resave: false,
+    proxy: true
+}))
+
+// //Express Session Middleware
+// app.use(session({
+//     name: "sid", //process.env.SESS_NAME,
+//     resave: false,
+//     saveUninitialized: false,
+//     secret: "abc123", //process.env.SESS_SECRET,
+
+//     cookie: {
+//         maxAge: TWO_HOURS, 
+//         samSite: true, 
+//         secure: process.env.NODE_ENV === 'production' 
+//         //TODO: secure: enable https - enable TLS connection to server 
+// 	}
+// }));
 
 app.use(express.json());
 
