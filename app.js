@@ -15,11 +15,11 @@ const port = process.env.PORT || 3000;
 var MySQLStore = require('express-mysql-session')(session);
 
 var options = {
-    host: "localhost",
-    port: "3306",
-    user: "root",
-    password: "",
-    database: "merged_db",
+    host: "eu-cdbr-west-02.cleardb.net",
+    port: port,
+    user: "bf6652f839f5d9",
+    password: "4eead042",
+    database: "heroku_af4f9f69f37b397"
     // clearExpired: true,
     // checkExpirationInterval: 900000,
     // expiration: 86400000,
