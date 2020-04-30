@@ -59,13 +59,30 @@ app.use(session({
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', "*");
+var cors = function(req, res, next) {
+    var whitelist = [
+        'http://localhost:3000',
+        'https://kandidat-test.herokuapp.com/'
+    ]
+
+    var origin = req.headers.origin;
+    if (whitelist.indexOf(origin) > -1) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
     res.setHeader('Access-Control-Allow-Credentials','true');
     res.setHeader('Access-Control-Allow-Headers','Origin, Content-type, Accept');
     res.setHeader('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, HEAD, OPTIONS');
     next()
-});
+}
+app.use(cors);
+
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', "*");
+//     res.setHeader('Access-Control-Allow-Credentials','true');
+//     res.setHeader('Access-Control-Allow-Headers','Origin, Content-type, Accept');
+//     res.setHeader('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, HEAD, OPTIONS');
+//     next()
+// });
 
 
 //routes
