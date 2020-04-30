@@ -7,10 +7,10 @@ var MySQLStore = require('express-mysql-session');
 
 //Creating a connection to the database
 const db = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,      
-    password: process.env.DB_PASS,    
-    database: process.env.MYSQL_DB         
+    host: "eu-cdbr-west-02.cleardb.net",
+    user: "bf6652f839f5d9",      
+    password: "4eead042",    
+    database: "heroku_af4f9f69f37b397"
 
     // port: "3306",
     // host: "localhost",
