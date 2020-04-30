@@ -100,7 +100,7 @@ router.get("/edit", authAdmin , async (req, res) => {
         }
         return res.status(200).json({
             success: 1,
-            data: result
+            users: result
         });
     }
 
@@ -116,7 +116,7 @@ router.get("/edit", authAdmin , async (req, res) => {
     } 
     return res.status(200).json({
         success: 1,
-        data: user
+        userdata: user
     });
 })
 
