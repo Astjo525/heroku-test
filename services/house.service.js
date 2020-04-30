@@ -1,7 +1,7 @@
 const { db } = require("../db");
 const { hashSync, compareSync } = require("bcrypt");
 
-let getHouseByHouseName = (house_name) => {
+let checkValidHouseName = (house_name) => {
     return new Promise((resolve, reject) => {
         db.query({ 
             sql: 'SELECT house_name FROM `personal_houses` WHERE house_name = ?',
@@ -16,7 +16,6 @@ let getHouseByHouseName = (house_name) => {
     });
 } 
 
-//Kallas i: post('/houses/user')
 let getImageId = (house_image) => {
     return new Promise((resolve, reject) => {
         db.query({ 
@@ -32,8 +31,9 @@ let getImageId = (house_image) => {
 }
 
 module.exports = {
-    //Kallas i: get('/houses/user'), get('houses/personal')
-    getPersonalHouses : (user_id) => {
+
+    listPersonalHouses : (user_id) => {
+
         return new Promise(async (resolve, reject) => {
             db.query({
                 sql: 
@@ -53,23 +53,6 @@ module.exports = {
        });
     },
 
-    //Kallas i: post('/houses/user')
-    getImageId: (house_image) => {
-        return new Promise((resolve, reject) => {
-            db.query({ 
-                sql: 'SELECT image_id FROM `personal_houses_images` WHERE house_image = ?',
-                values: [house_image],
-            }, (error, result) => {
-                if(error){
-                    reject(error);
-                }
-                resolve(result[0].image_id);
-            })
-        });
-    },
-
-    //Kallas i: post('/houses/user')
-    //Gör just nu att error ges om man sätter in två bilder av samma namn. Ska man istället asigna samma id till dubletten?
     insertImage : (house_image) => {
         return new Promise(async (resolve, reject) => {
             if((await getImageId(house_image)).length != 0) {
@@ -87,10 +70,23 @@ module.exports = {
         })
     },
 
-    //Kallas i: post('/houses/user')
-    createHouse : (body, admin_id) => {
+    getImageId: (house_image) => {
+        return new Promise((resolve, reject) => {
+            db.query({ 
+                sql: 'SELECT image_id FROM `personal_houses_images` WHERE house_image = ?',
+                values: [house_image],
+            }, (error, result) => {
+                if(error){
+                    reject(error);
+                }
+                resolve(result[0].image_id);
+            })
+        });
+    },
+
+    upload : (body, admin_id) => {
         return new Promise( async (resolve, reject) => {
-            if((await getHouseByHouseName(body.house_name)).length != 0) {
+            if((await checkValidHouseName(body.house_name)).length != 0) {
                 resolve(false);
             }
             db.query({
@@ -105,7 +101,6 @@ module.exports = {
     })
     },
 
-    //Kallas i: delete('/houses/user'), patch('/houses')
     getHouseById : (house_id, user_id) => {
         return new Promise ((resolve, reject) => {
             db.query({
@@ -121,8 +116,22 @@ module.exports = {
         });
     },
 
-    //Kallas i: delete('/houses/user');
-    deleteHouse : (query) => {
+    update : (query, admin_id) => {
+ 
+        return new Promise((resolve, reject) => {
+            db.query({
+                sql: 'UPDATE `personal_houses` SET house_name=? WHERE house_id = ?',
+                values: [query.house_name, query.id]
+            }, (error, result) => {
+                if(error) {
+                    reject(error);
+                }
+                resolve(result);
+               });
+        })   
+    },
+
+    removeHouse : (query) => {
 
         return new Promise((resolve, reject) => {
             db.query({
@@ -136,20 +145,4 @@ module.exports = {
                });
         })   
     },
-
-    //Kallas i: patch('/houses')    
-    updateHouse : (query, admin_id) => {
- 
-         return new Promise((resolve, reject) => {
-             db.query({
-                 sql: 'UPDATE `personal_houses` SET house_name=? WHERE house_id = ?',
-                 values: [query.house_name, query.id]
-             }, (error, result) => {
-                 if(error) {
-                     reject(error);
-                 }
-                 resolve(result);
-                });
-         })   
-     },
 }

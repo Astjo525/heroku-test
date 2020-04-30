@@ -2,8 +2,9 @@ const { db } = require("../db");
 const { hashSync, compareSync } = require("bcrypt");
 
 module.exports = {
-    //Kallas i: post('login/app')
-    loginApp : (username, password) => {
+
+    login : (username, password) => {
+
         return new Promise( async (resolve, reject) => {
             db.query({ 
                 sql: 'SELECT password FROM `users` WHERE `username` = ?',
@@ -25,8 +26,8 @@ module.exports = {
         });
     },
 
-    //Kallas i: post('login/app')
     getUserIdByUsername: (username) => {
+
         return new Promise((resolve, reject) => {
             db.query({ 
                 sql: 'SELECT user_id FROM `users` WHERE username = ?',
@@ -35,14 +36,12 @@ module.exports = {
                 if(error){
                     reject(error);
                 }
-                console.log("RESULT: ", result[0].user_id);
                 resolve(result[0].user_id);
             })
         });
     },
 
-    //Kallas i: get('/houses/standard')
-    getStandardHouses : () => {
+    listStandardHouses : () => {
         return new Promise(async (resolve, reject) => {
             db.query({
                 sql: 

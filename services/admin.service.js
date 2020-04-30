@@ -1,7 +1,7 @@
 const { db } = require("../db");
 const { hashSync, compareSync } = require("bcrypt");
 
-let getUserByUsername = (username) => {
+let checkValidUsername = (username) => {
     return new Promise((resolve, reject) => {
         db.query({ 
             sql: 'SELECT username FROM `users` WHERE username = ?',
@@ -10,15 +10,14 @@ let getUserByUsername = (username) => {
             if(error){
                 reject(error);
             }
-            console.log(result);
             resolve(result);
         })
     });
 } 
 
 module.exports = {
-    //Kallas i: post('login/web')
-    loginWeb : (username, password) => {
+    login: (username, password) => {
+
         return new Promise( async (resolve, reject) => {
             db.query({ 
                 sql: 'SELECT password FROM `administrators` WHERE `username` = ?',
@@ -41,8 +40,8 @@ module.exports = {
         });
     },
 
-    //Kallas i: post('login/web')
     getAdminIdByUsername: (username) => {
+
         return new Promise((resolve, reject) => {
             db.query({ 
                 sql: 'SELECT admin_id FROM `administrators` WHERE username = ?',
@@ -51,14 +50,13 @@ module.exports = {
                 if(error){
                     reject(error);
                 }
-                console.log("RESULT: ", result[0].admin_id);
                 resolve(result[0].admin_id);
             })
         });
     }, 
 
-    //Kallas i: get('/home')
     getAdminNameById : (admin_id) => {
+
         return new Promise ((resolve, reject) => {
             db.query({
                 sql: 'SELECT username FROM `administrators` WHERE admin_id = ?',
@@ -73,17 +71,13 @@ module.exports = {
         });
     },
 
-    //Kallas i: post('/register')
-    registerUser : (body, admin_id) => {
-        console.log(body)
+    register : (body, admin_id) => {
 
         let regpwd = body.password;
         let hash = hashSync(regpwd, 10); 
 
-        console.log("USERNAME: ", body.username);
-
         return new Promise( async (resolve, reject) => {
-                if((await getUserByUsername(body.username)).length != 0){
+                if((await checkValidUsername(body.username)).length != 0){
                     resolve(false);
                     return;
                 }
@@ -99,8 +93,8 @@ module.exports = {
         })
     },
 
-    //Kallas i: get('/edit')
-    getUsers : (admin_id) => {
+    listUsers : (admin_id) => {
+
         return new Promise ((resolve, reject) => {
             db.query({
                 sql: 'SELECT user_id, username FROM `users` WHERE admin_id = ?',
@@ -117,6 +111,7 @@ module.exports = {
 
     //Kallas i: get('/edit'), patch('/edit'), delete('/edit'), post('/houses/user')
     getUserById : (id, admin_id) => {
+
         return new Promise ((resolve, reject) => {
             db.query({
                 sql: 'SELECT user_id, username FROM `users` WHERE user_id = ? AND admin_id = ?',
@@ -131,8 +126,8 @@ module.exports = {
         });
     },
 
-    //Kallas i: patch('/edit')
-    updateUser : (query, admin_id) => {
+    update : (query, admin_id) => {
+
        let newpass = query.password;
        let newhash = hashSync(newpass, 10); 
 
@@ -149,8 +144,7 @@ module.exports = {
         })   
     },
     
-    //Kallas i: delete('/edit')
-    deleteUser : (query, admin_id) => {
+    removeUser : (query, admin_id) => {
 
          return new Promise((resolve, reject) => {
              db.query({
