@@ -1,4 +1,5 @@
-require("dotenv").config();
+//require("dotenv").config();
+require('dotenv').config({ path: require('find-config')('.env') })
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -13,7 +14,7 @@ const port = process.env.PORT || 3000;
 //Express Session Middleware
 app.use(session({
     key: process.env.SESS_NAME,
-    secret: "abc123", //process.env.SESS_SECRET,
+    secret: process.env.SESS_SECRET,
     store: sessionStore,
     resave: false,
     saveUninitialized: false
