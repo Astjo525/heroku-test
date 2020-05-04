@@ -1,9 +1,9 @@
 /*************************************************************
 * Script connecting the database to the server          *
 **************************************************************/
-
+require("dotenv").config();
 const mysql = require("mysql"); 
-var MySQLStore = require('express-mysql-session');
+const MySQLStore = require('express-mysql-session');
 
 //Creating a connection to the database
 const db = mysql.createPool({
