@@ -64,7 +64,6 @@ module.exports = {
         else {
             let imageInserted = await insertImage(req.body.house_image);
             image_id = await getImageId(req.body.house_image); 
-            console.log("ERE:m ", image_id);
 
             if(!imageInserted) {
                 return res.status(400).json({
