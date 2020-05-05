@@ -67,7 +67,7 @@ module.exports = {
                     'FROM standard_houses ' +
                         'INNER JOIN collections USING (collection_id) ' +
                         'INNER JOIN roof_types USING (roof_type_id) ' +
-                        'INNER JOIN standard_houses_models (model_id) ' +
+                        'INNER JOIN standard_houses_models USING (model_id) ' +
                     'ORDER BY house_name',
                 values: []
             }, (error, results) => {
