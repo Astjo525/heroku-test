@@ -7,16 +7,11 @@ const MySQLStore = require('express-mysql-session');
 
 //Creating a connection to the database
 const db = mysql.createPool({
-    host: "eu-cdbr-west-02.cleardb.net",
-    user: "bf6652f839f5d9",      
-    password: "4eead042",    
-    database: "heroku_af4f9f69f37b397"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,    
+    password: process.env.DB_PASS,    
+    database: process.env.MYSQL_DB
 
-    // port: "3306",
-    // host: "localhost",
-    // user: "root",
-    // password: "",
-    // database: "merged_db"
 });
 
 var options = {
