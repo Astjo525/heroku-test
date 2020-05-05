@@ -58,7 +58,12 @@ module.exports = {
                             'short_info, ' +
                             'long_info, ' + 
                             'house_image, ' +
-                            'house_model ' +
+                            'house_model, ' +
+                            'roof_numb, ' +
+                            'wall_numb, ' +
+                            'floor_numb, ' +
+                            'window_numb, ' +
+                            'roof_plates ' +
                     'FROM standard_houses ' +
                         'INNER JOIN collections USING (collection_id) ' +
                         'INNER JOIN roof_types USING (roof_type_id) ' +
