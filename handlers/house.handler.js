@@ -79,8 +79,6 @@ module.exports = {
             house_model: req.body.house_model
         }
 
-        console.log("IMAGE_ID: ", userInput.image_id);
-
         let result = await upload(userInput, query);
 
         if(!result){
