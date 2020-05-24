@@ -22,16 +22,17 @@ app.use(session({
 app.use(express.json());
 
 let cors = function(req, res, next) {
-    let accessPorts = [
-        'http://localhost:3000',
-        'https://kandidat-frontend-gh0dkoimn.now.sh/',
-        'https://kandidat-test.herokuapp.com/'
-    ]
+    // let accessPorts = [
+    //     'http://localhost:3000',
+    //     'https://kandidat-frontend-gh0dkoimn.now.sh/',
+    //     'https://kandidat-test.herokuapp.com/'
+    // ]
 
+    // let origin = req.headers.origin;
+    // if (accessPorts.indexOf(origin) > -1) {
+    //     res.setHeader('Access-Control-Allow-Origin', origin);
+    //}
     let origin = req.headers.origin;
-    if (accessPorts.indexOf(origin) > -1) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    }
     res.setHeader('Access-Control-Allow-Credentials','true');
     res.setHeader('Access-Control-Allow-Headers','Origin, Content-type, Accept');
     res.setHeader('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, HEAD, OPTIONS');
