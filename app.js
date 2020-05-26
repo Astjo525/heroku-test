@@ -32,7 +32,6 @@ let cors = function(req, res, next) {
     if (accessPorts.indexOf(origin) > -1) {
         res.setHeader('Access-Control-Allow-Origin', origin);
     }
-    let origin = req.headers.origin;
     res.setHeader('Access-Control-Allow-Credentials','true');
     res.setHeader('Access-Control-Allow-Headers','Origin, Content-type, Accept');
     res.setHeader('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, HEAD, OPTIONS');
