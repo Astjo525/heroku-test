@@ -24,7 +24,7 @@ app.use(express.json());
 let cors = function(req, res, next) {
     let accessPorts = [
         'http://localhost:3000',
-        'https://kandidat-frontend-gh0dkoimn.now.sh/',
+        //'https://kandidat-frontend-gh0dkoimn.now.sh/',
         'https://kandidat-test.herokuapp.com/'
     ]
 
